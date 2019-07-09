@@ -130,6 +130,11 @@ open class AxisRendererBase: Renderer
         {
             interval = Double(range) / Double(labelCount - 1)
             
+            if axis.granularityEnabled 
+            {
+                interval = interval < axis.granularity ? axis.granularity : interval
+            }
+
             // Ensure stops contains at least n elements.
             axis.entries.removeAll(keepingCapacity: true)
             axis.entries.reserveCapacity(labelCount)
